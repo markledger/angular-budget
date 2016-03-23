@@ -11,12 +11,13 @@ budgetApp.controller('budgetController', ['$scope','$http', '$routeParams',
 
   var filename = 'js/spends.json';
 
-
   if($routeParams.spendId){
      $http.get(filename).success(function(data) {
           $scope.spend = data[$routeParams.spendId];
           $scope.spend.date = new Date(data[$routeParams.spendId].date);
     });
+  }else{
+
   }
 
   $scope.update = function(spend) {
@@ -36,7 +37,6 @@ budgetApp.controller('budgetController', ['$scope','$http', '$routeParams',
 
   $scope.reset = function() {
      $scope.spend = angular.copy($scope.master);
-
   };
 
 

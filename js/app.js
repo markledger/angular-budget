@@ -1,7 +1,10 @@
 var budgetApp = angular.module('budgetApp', [
   'ngRoute',
-  'ui.date'
+  'ui.date',
+  'ngAnimate'
   ]);
+
+
 
 budgetApp.config(['$routeProvider',
   function($routeProvider) {

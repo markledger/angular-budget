@@ -1,10 +1,7 @@
 
-<div class="container" ng-controller="budgetController">
+<div class="container">
 <h2>What did you buy?</h2>
-<pre>
-{{master | json}}
-{{spend | json}}
-</pre>
+
 <p>
         <form novalidate class="form-horizontal">
           <div class="form-group">
@@ -44,7 +41,7 @@
             </div>
           <table class="table">
           <th>Date</th><th>Name</th><th>Amount</th><th>Category</th><th></th>
-          <tr ng-repeat="spend in currentSpends | filter:searchSpends"><td>{{spend.date}}</td><td>{{spend.name}}</td><td>{{spend.amount}}</td><td>{{spend.category}}</td><td><a ng-href="#/spend/{{spend.id}}">edit</a></td></tr>
+          <tr ng-animate="animate" ng-repeat="spend in currentSpends | filter:searchSpends" class="spend-listing"><td>{{spend.date}}</td><td>{{spend.name}}</td><td>{{spend.amount}}</td><td>{{spend.category}}</td><td><a ng-href="#/spend/{{spend.id}}">edit</a></td></tr>
           </table>
 
 

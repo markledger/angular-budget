@@ -1,0 +1,52 @@
+
+<div class="container" ng-controller="budgetController">
+<h2>What did you buy?</h2>
+<pre>
+{{master | json}}
+{{spend | json}}
+</pre>
+<p>
+        <form novalidate class="form-horizontal">
+          <div class="form-group">
+            <label class="sr-only" for="spendName">Name</label>
+            <input class="form-control" id="spendName" placeholder="What did you buy?" ng-model="spend.name">
+          </div>
+
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+            <div class="input-group">
+              <div class="input-group-addon">&pound;</div>
+              <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="spend.amount" required="" type="number" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="sr-only" for="datepicker">Date</label>
+
+              <input ui-date="dateOptions" ng-model="spend.date" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <budget-categories-dropdown chosencategory="spend.category"></budget-categories-dropdown><BR>
+          </div>
+
+
+
+          <button type="submit" ng-click="reset(form)" value="Reset" class="btn btn-primary">Reset</button>
+          <button type="submit" ng-click="update(spend)" value="Save" class="btn btn-primary">Save</button>
+        </form>
+<BR>
+
+          <label class="sr-only" for="searchSpends">Search</label>
+            <div class="input-group">
+
+              <input type="text"  id="searchSpends" placeholder="Search" ng-model="searchSpends" />
+            </div>
+          <table class="table">
+          <th>Date</th><th>Name</th><th>Amount</th><th>Category</th><th></th>
+          <tr ng-repeat="spend in currentSpends | filter:searchSpends"><td>{{spend.date}}</td><td>{{spend.name}}</td><td>{{spend.amount}}</td><td>{{spend.category}}</td><td><a ng-href="#/spend/{{spend.id}}">edit</a></td></tr>
+          </table>
+
+
+  </div>
+

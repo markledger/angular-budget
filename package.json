@@ -1,0 +1,39 @@
+{
+  "name": "budget",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "http-server": "^0.6.1",
+    "karma": "^0.12.37",
+    "bower": "^1.7.7",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-firefox-launcher": "^0.1.7",
+    "protractor": "^2.5.1",
+    "karma-jasmine": "^0.1.6",
+    "shelljs": "^0.2.6",
+    "tmp": "^0.0.23"
+  },
+  "devDependencies": {
+    "karma": "^0.12.37",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-jasmine": "^0.1.6",
+    "protractor": "^2.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markledger/angular-budget.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markledger/angular-budget/issues"
+  },
+  "homepage": "https://github.com/markledger/angular-budget#readme"
+}

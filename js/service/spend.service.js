@@ -17,10 +17,15 @@ budgetApp.service('spendService', function spendService($http, $q, $rootScope){
 		return defer.promise;
 	}
 
-	spendService.create = function(spendService){
+	spendService.create = function(spend){
 		var defer = $q.defer();
 
-		$http.post($rootScope.endPoint + '/spend/add/', spendService)
+		$http({
+			url: $rootScope.endPoint + '/spend/add',
+            method: "POST",
+            data: spend,
+            headers: {'Content-Type': 'application/json'}
+			})
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);

@@ -14,7 +14,7 @@ $app->before(function (Request $request) {
 });
 
 $app->post('/spend/add', function (Silex\Application $app, Request $request) {
-    
+   
     $post = array(
         'name' => $request->request->get('name'),
         'amount' => $request->request->get('amount'),
@@ -22,23 +22,16 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
         'category' => $request->request->get('category'),
     );
 
-    $queryBuilder = $app['db']->createQueryBuilder();
-    $queryBuilder
-        ->insert('spends')
-        ->values(
-            array(
-                'name' => '?',
-                'amount' => '?',
-                'date' => '?',
-                'category' => '?',
-            )
-        )
-        ->setParameter(0, $post['name'])
-        ->setParameter(1, $post['amount'])
-        ->setParameter(1, $post['date'])
-        ->setParameter(1, $post['category']);
-
-    return new Response('Thank you for your feedback!', 201);
+    
+    $sql = "INSERT INTO spends (name, amount, date, category) VALUES (?, ?, ?, ?)";
+    $stmt = $app['db']->prepare($sql);
+    $stmt->bindValue(1, $post['name']);
+    $stmt->bindValue(2, $post['amount']);
+    $stmt->bindValue(3, $post['date']);
+    $stmt->bindValue(4, $post['category']);
+    $stmt->execute();
+        
+        return new Response('Thank you for your feedback!', 201);
 });
 
 // Declare our primary action

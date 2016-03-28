@@ -1,0 +1,13 @@
+{
+    "name": "markledger/silex-backend",
+    "require": {
+        "silex/silex": "*",
+        "doctrine/dbal": "~2.2"
+    },
+    "authors": [
+        {
+            "name": "Mark Ledger",
+            "email": "useyourillusiontoo@gmail.com"
+        }
+    ]
+}

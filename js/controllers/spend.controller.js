@@ -1,13 +1,12 @@
 
 
 
-budgetApp.controller('spendCtrl',  
+budgetApp.controller('spendCtrl',   ['$scope', '$routeParams', 'spendService',
 	function($scope, $routeParams, spendService){
 
 	$scope.init = function(){
+		$scope.reset();
 		$scope.getAll();
-		$scope.master = {};
-
 	}
 
 	$scope.create = function(){
@@ -16,7 +15,11 @@ budgetApp.controller('spendCtrl',
 		
 	}
 
- 	$scope.reset = function() {
+ 	$scope.reset = function(spendForm) {
+ 		if(spendForm){
+	    	spendForm.$setPristine();
+	    	spendForm.$setUntouched();
+		}
     	$scope.spend = angular.copy($scope.master);
   	};
 
@@ -32,4 +35,4 @@ budgetApp.controller('spendCtrl',
 
 	$scope.init();
 
-});
+}]);

@@ -1,26 +1,46 @@
+<style type="text/css">
+  .form-horizontal input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+  .form-horizontal input.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }
+</style>
+
 
 <div class="container">
 <h2>What did you buy?</h2>
+ <pre>user = {{spend | json}}</pre>
 
 <p>
-        <form novalidate class="form-horizontal">
+        <form  class="form-horizontal" name="spendForm" novalidate>
           <div class="form-group">
             <label class="sr-only" for="spendName">Name</label>
-            <input class="form-control" id="spendName" placeholder="What did you buy?" ng-model="spend.name">
+            <input type="text" class="form-control" placeholder="What did you buy?" ng-model="spend.name" required="" name="sName">
+            <div ng-show="spendForm.$submitted || spendForm.sName.$touched">
+              <div ng-show="spendForm.sName.$error.required">Specify your purchase.</div>
+            </div>
           </div>
 
           <div class="form-group">
-            <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+            <label class="sr-only" for="exampleInputAmount">Amount</label>
             <div class="input-group">
               <div class="input-group-addon">&pound;</div>
-              <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="spend.amount" required="" type="number" />
+              <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="spend.amount" required="" type="number" name="sAmount"/>
+            </div>
+            <div ng-show="spendForm.$submitted || spendForm.sAmount.$touched">
+              <div ng-show="spendForm.sAmount.$error.required">Enter the amount</div>
             </div>
           </div>
 
           <div class="form-group">
             <label class="sr-only" for="datepicker">Date</label>
 
-              <input ui-date="dateOptions" ng-model="spend.date" class="form-control">
+              <input ui-date="dateOptions" required="" name="sDate" ng-model="spend.date" class="form-control" type="text">
+              <div ng-show="spendForm.$submitted || spendForm.sDate.$touched">
+              <div ng-show="spendForm.sDate.$error.required">Provide a Date</div>
+            </div>
           </div>
 
           <div class="form-group">
@@ -29,7 +49,7 @@
 
 
 
-          <button type="submit" ng-click="reset(form)" value="Reset" class="btn btn-primary">Reset</button>
+          <button type="submit" ng-click="reset(spendForm)" value="Reset" class="btn btn-primary">Reset</button>
           <button type="submit" ng-click="create(spend)" value="Save" class="btn btn-primary">Save</button>
         </form>
 <BR>

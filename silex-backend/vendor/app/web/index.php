@@ -19,7 +19,7 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
         'name' => $request->request->get('name'),
         'amount' => $request->request->get('amount'),
         'date' => $request->request->get('date'),
-        'category' => $request->request->get('category'),
+        'category' => json_encode($request->request->get('category')),
     );
 
     

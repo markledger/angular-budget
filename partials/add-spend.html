@@ -27,7 +27,7 @@
             <label class="sr-only" for="exampleInputAmount">Amount</label>
             <div class="input-group">
               <div class="input-group-addon">&pound;</div>
-              <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="spend.amount" required="" type="number" name="sAmount"/>
+              <input type="text" class="form-control" placeholder="Amount" ng-model="spend.amount" type="number" required=""  name="sAmount"/>
             </div>
             <div ng-show="spendForm.$submitted || spendForm.sAmount.$touched">
               <div ng-show="spendForm.sAmount.$error.required">Enter the amount</div>

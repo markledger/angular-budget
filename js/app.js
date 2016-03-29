@@ -3,8 +3,12 @@ var budgetApp = angular.module('budgetApp', [
   'ui.date',
   'ngAnimate'
   ])
-.run(function($rootScope){
+.run(function($rootScope, $route){
   $rootScope.endPoint = 'http://silex.dev/silex-backend/vendor/app/web';
+  $rootScope.$on("$routeChangeSuccess", function(currentRoute, previousRoute){
+    //Change page title, based on Route information
+    $rootScope.title = $route.current.title;
+  });
 });
 
 
@@ -14,11 +18,13 @@ budgetApp.config(['$routeProvider',
     $routeProvider.
       when('/spending', {
         templateUrl: 'partials/add-spend.html',
-        controller: 'spendCtrl'
+        controller: 'spendCtrl',
+        title: "Add a spend"
       }).
       when('/spend/:spendId', {
         templateUrl: 'partials/add-spend.html',
-        controller: 'spendCtrl'
+        controller: 'spendCtrl',
+        title: "Review spend"
       }).
       otherwise({
         redirectTo: '/spending'

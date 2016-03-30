@@ -6,6 +6,7 @@ var budgetApp = angular.module('budgetApp', [
   ])
 .run(function($rootScope, $route){
   $rootScope.endPoint = 'http://silex.dev/silex-backend/vendor/app/web';
+  //$rootScope.endPoint = 'http://localhost:8888/angular-budget/silex-backend/vendor/app/web';
   $rootScope.$on("$routeChangeSuccess", function(currentRoute, previousRoute){
     //Change page title, based on Route information
     $rootScope.title = $route.current.title;

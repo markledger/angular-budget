@@ -10,9 +10,8 @@ budgetApp.controller('spendCtrl',   ['$scope', '$routeParams', 'spendService',
 	}
 
 	$scope.create = function(){
-
+		console.log($scope.spend);
 		spendService.create($scope.spend);
-		
 	}
 
  	$scope.reset = function(spendForm) {

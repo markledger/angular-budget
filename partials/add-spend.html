@@ -1,70 +1,58 @@
-<style type="text/css">
-  .form-horizontal input.ng-invalid.ng-touched {
-    background-color: #FA787E;
-  }
-
-  .form-horizontal input.ng-valid.ng-touched {
-    background-color: #78FA89;
-  }
-</style>
-
-
 <div class="container">
-<h2>What did you buy?</h2>
+  <h2>What did you buy?</h2>
 
+  <form  class="form-horizontal" name="spendForm" novalidate>
+    <div class="form-group">
+      <label class="sr-only" for="spendName">Name</label>
+      <input type="text" class="form-control" placeholder="What did you buy?" ng-model="spend.name" required="" name="sName">
+      <div ng-show="spendForm.$submitted || spendForm.sName.$touched">
+        <div ng-show="spendForm.sName.$error.required">Specify your purchase.</div>
+      </div>
+    </div>
 
-<p>
-        <form  class="form-horizontal" name="spendForm" novalidate>
-          <div class="form-group">
-            <label class="sr-only" for="spendName">Name</label>
-            <input type="text" class="form-control" placeholder="What did you buy?" ng-model="spend.name" required="" name="sName">
-            <div ng-show="spendForm.$submitted || spendForm.sName.$touched">
-              <div ng-show="spendForm.sName.$error.required">Specify your purchase.</div>
-            </div>
-          </div>
+    <div class="form-group">
+      <label class="sr-only" for="exampleInputAmount">Amount</label>
+      <div class="input-group">
+        <div class="input-group-addon">&pound;</div>
+        <input type="text" class="form-control" placeholder="Amount" ng-model="spend.amount" required=""  name="sAmount" fcsa-number="{  maxDecimals: 2 }"/>
+      </div>
 
-          <div class="form-group">
-            <label class="sr-only" for="exampleInputAmount">Amount</label>
-            <div class="input-group">
-              <div class="input-group-addon">&pound;</div>
-              <input type="text" class="form-control" placeholder="Amount" ng-model="spend.amount" required=""  name="sAmount" fcsa-number="{  maxDecimals: 2 }"/>
-            </div>
+      <div ng-show="spendForm.$submitted || spendForm.sAmount.$touched">
+        <div ng-show="spendForm.sAmount.$invalid">Enter the amount (no more than 2 decimal places)</div>
+      </div>
+    </div>
 
-            <div ng-show="spendForm.$submitted || spendForm.sAmount.$touched">
-              <div ng-show="spendForm.sAmount.$invalid">Enter the amount (no more than 2 decimal places)</div>
-            </div>
-          </div>
+    <div class="form-group">
+      <label class="sr-only" for="datepicker">Date</label>
 
-          <div class="form-group">
-            <label class="sr-only" for="datepicker">Date</label>
+      <input ui-date="dateOptions" required="" name="sDate" ng-model="spend.date" class="form-control" type="text">
+      <div ng-show="spendForm.$submitted || spendForm.sDate.$touched">
+        <div ng-show="spendForm.sDate.$error.required">Provide a Date</div>
+      </div>
+    </div>
 
-              <input ui-date="dateOptions" required="" name="sDate" ng-model="spend.date" class="form-control" type="text">
-              <div ng-show="spendForm.$submitted || spendForm.sDate.$touched">
-              <div ng-show="spendForm.sDate.$error.required">Provide a Date</div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <budget-categories-dropdown chosencategory="spend.category"></budget-categories-dropdown><BR>
-          </div>
+    <div class="form-group">
+      <budget-categories-dropdown chosencategory="spend.category"></budget-categories-dropdown><BR>
+    </div>
 
 
 
-          <button type="submit" ng-click="reset(spendForm)" value="Reset" class="btn btn-primary">Reset</button>
-          <button type="submit" ng-click="create(spend)" value="Save" class="btn btn-primary">Save</button>
-        </form>
-<BR>
+    <button type="submit" ng-click="reset(spendForm)" value="Reset" class="btn btn-primary">Reset</button>
+    <button type="submit" ng-click="create(spend)" value="Save" class="btn btn-primary" ng-disabled="spendForm.$invalid">Save</button>
+  </form>
+</div>
+<div class="container">
+  <div class="row">
 
-          <label class="sr-only" for="searchSpends">Search</label>
-            <div class="input-group">
+    <label class="sr-only" for="searchSpends">Search</label>
+    <div class="input-group">
 
-              <input type="text"  id="searchSpends" placeholder="Search" ng-model="searchSpends" />
-            </div>
-          <table class="table">
-          <th>Date</th><th>Name</th><th>Amount</th><th>Category</th><th></th>
-          <tr ng-animate="animate" ng-repeat="spend in currentSpends | filter:searchSpends" class="spend-listing"><td>{{spend.date}}</td><td>{{spend.name}}</td><td>{{spend.amount}}</td><td>{{spend.category}}</td><td><a ng-href="#/spend/{{spend.id}}">edit</a></td></tr>
-          </table>
-
-
-  </div>
+      <input type="text"  id="searchSpends" placeholder="Search" ng-model="searchSpends" />
+    </div>
+    <table class="table">
+      <th>Date</th><th>Name</th><th>Amount</th><th>Category</th><th></th>
+      <tr ng-animate="animate" ng-repeat="spend in currentSpends | filter:searchSpends" class="spend-listing"><td>{{spend.date}}</td><td>{{spend.name}}</td><td>{{spend.amount}}</td><td>{{spend.category}}</td><td><a ng-href="#/spend/{{spend.id}}">edit</a></td></tr>
+    </table>
+    </div>
+</div>
 

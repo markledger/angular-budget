@@ -14,7 +14,7 @@ $app->before(function (Request $request) {
 });
 
 $app->post('/spend/add', function (Silex\Application $app, Request $request) {
-   
+   var_dump($app['db']);
     $post = array(
         'name' => $request->request->get('name'),
         'amount' => $request->request->get('amount'),
@@ -22,7 +22,7 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
         'category' => json_encode($request->request->get('category')),
     );
 
-    
+
     $sql = "INSERT INTO spends (name, amount, date, category) VALUES (?, ?, ?, ?)";
     $stmt = $app['db']->prepare($sql);
     $stmt->bindValue(1, $post['name']);
@@ -30,7 +30,7 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
     $stmt->bindValue(3, $post['date']);
     $stmt->bindValue(4, $post['category']);
     $stmt->execute();
-        
+
         return new Response('Thank you for your feedback!', 201);
 });
 

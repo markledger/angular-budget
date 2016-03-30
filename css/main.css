@@ -1,0 +1,8 @@
+
+  .form-horizontal input.ng-invalid.ng-touched, .form-horizontal select.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+  .form-horizontal input.ng-valid.ng-touched, .form-horizontal select.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }

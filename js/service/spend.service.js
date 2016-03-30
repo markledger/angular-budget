@@ -5,7 +5,10 @@ budgetApp.service('spendService', function spendService($http, $q, $rootScope){
 	spendService.getAllSpends = function(){
 		var defer = $q.defer();
 		 
-		$http.get('js/spends.json')
+		$http({
+			url: $rootScope.endPoint + '/spend/all',
+            method: "GET"
+        })
 		.success(function(response){
 			spendService.spendList = response;
 			defer.resolve(response);
@@ -27,7 +30,6 @@ budgetApp.service('spendService', function spendService($http, $q, $rootScope){
             headers: {'Content-Type': 'application/json'}
 			})
 		.success(function(response){
-			console.log(response);
 			defer.resolve(response);
 		})
 		.error(function(error, status){

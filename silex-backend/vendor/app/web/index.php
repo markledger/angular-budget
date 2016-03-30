@@ -17,7 +17,7 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
    var_dump($app['db']);
     $post = array(
         'name' => $request->request->get('name'),
-        'amount' => $request->request->get('amount'),
+        'amount' => $request->request->get('amount') * 100,
         'date' => $request->request->get('date'),
         'category' => json_encode($request->request->get('category')),
     );
@@ -31,12 +31,18 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
     $stmt->bindValue(4, $post['category']);
     $stmt->execute();
 
-        return new Response('Thank you for your feedback!', 201);
+    return new Response('Thank you for your feedback!', 201);
 });
 
 // Declare our primary action
-$app->get('/', function () {
-    return 'Mr Watson, come here, I want to see you.';
+$app->get('/spend/all',  function (Silex\Application $app ) {
+   
+   $sql = "SELECT * FROM spends";
+   $stmt = $app['db']->prepare($sql); 
+   $stmt->execute();
+   $result = $stmt->fetchAll();
+   
+   return $app->json($result);
 });
 
 $app->run();

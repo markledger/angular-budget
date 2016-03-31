@@ -9,19 +9,21 @@ budgetApp.controller('spendCtrl',   ['$scope', '$routeParams', 'spendService',
 
 	$scope.init = function(form){
 		$scope.reset(form);
-		
+		$scope.getAll();
 	}
 
 	$scope.create = function(spend){
-		$scope.master = angular.copy(spend);	
-		spendService.create(spend).then(function(response){
-			$scope.getAll();
-		}, function(error){
+			
+		spendService.create(spend)
+		 .then(function(response){
+			$scope.init($scope.form);
+		 }, function(error){
 			//error
-		});	
+		 });	
 	}
 
  	$scope.reset = function(form) {	
+
  		if(form){
 	    	form.$setPristine();
 	    	form.$setUntouched();

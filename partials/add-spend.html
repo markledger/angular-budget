@@ -51,7 +51,7 @@
     </div>
     <table class="table">
       <th>Date</th><th>Name</th><th>Amount</th><th>Category</th><th></th>
-      <tr ng-animate="animate" ng-repeat="spend in currentSpends | filter:searchSpends" class="spend-listing"><td>{{spend.date}}</td><td>{{spend.name}}</td><td>{{spend.amount}}</td><td>{{spend.category}}</td><td><a ng-href="#/spend/{{spend.id}}">edit</a></td></tr>
+      <tr ng-animate="animate" ng-repeat="spend in currentSpends | filter:searchSpends | orderBy: orderBy | limitTo:quantity" class="spend-listing"><td>{{spend.date | date:'fullDate'}}</td><td>{{spend.name}}</td><td>{{spend.amount}}</td><td>{{spend.category }}</td><td><a ng-href="#/spend/{{spend.id}}">edit</a></td></tr>
     </table>
     </div>
 </div>

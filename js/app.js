@@ -2,7 +2,8 @@ var budgetApp = angular.module('budgetApp', [
   'ngRoute',
   'ui.date',
   'ngAnimate',
-  'fcsa-number'
+  'fcsa-number',
+  'ui.bootstrap'
   ])
 .run(function($rootScope, $route){
   //$rootScope.endPoint = 'http://silex.dev/silex-backend/vendor/app/web';

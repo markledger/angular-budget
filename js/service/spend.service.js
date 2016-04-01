@@ -6,7 +6,7 @@ budgetApp.service('spendService', ['$http', '$q', '$rootScope',  function spendS
 		var defer = $q.defer();
 
 		$http({
-			url: $rootScope.endPoint + '/spend/all',
+						url: $rootScope.endPoint + '/spend/all',
             method: "GET"
         })
 		.success(function(response){
@@ -24,10 +24,29 @@ budgetApp.service('spendService', ['$http', '$q', '$rootScope',  function spendS
 		var defer = $q.defer();
 
 		$http({
-			url: $rootScope.endPoint + '/spend/add',
+						url: $rootScope.endPoint + '/spend/add',
             method: "POST",
             data: spend,
             headers: {'Content-Type': 'application/json'}
+			})
+		.success(function(response){
+			defer.resolve(response);
+		})
+		.error(function(error, status){
+			defer.reject(error);
+		})
+		return defer.promise;
+	}
+
+
+	spendService.delete = function(id){
+
+		var defer = $q.defer();
+
+		$http({
+						url: $rootScope.endPoint + '/spend/delete/' +id,
+            method: "DELETE"
+
 			})
 		.success(function(response){
 			defer.resolve(response);

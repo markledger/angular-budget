@@ -22,7 +22,6 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
         'category' => json_encode($request->request->get('category')),
     );
 
-
     $sql = "INSERT INTO spends (name, amount, date, category) VALUES (?, ?, ?, ?)";
     $stmt = $app['db']->prepare($sql);
     $stmt->bindValue(1, $post['name']);
@@ -34,7 +33,7 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
     return new Response('Thank you for your feedback!', 201);
 });
 
-// Declare our primary action
+
 $app->get('/spend/all',  function (Silex\Application $app ) {
 
    $sql = "SELECT * FROM spends";
@@ -44,6 +43,18 @@ $app->get('/spend/all',  function (Silex\Application $app ) {
 
    return $app->json($result);
 });
+
+
+$app->delete('/spend/delete/{id}',  function ($id, Silex\Application $app ) {
+var_dump($id);
+   $sql      = "DELETE FROM spends WHERE id = ?";
+   $rowCount = $app['db']->executeUpdate($sql, array($id));
+   if($rowCount !=  1){
+      return new Response('Error deleting record ID: ' . $id, Response::HTTP_NO_CONTENT);
+   }
+   return new Response('Spend successfully deleted.', Response::HTTP_INTERNAL_SERVER_ERROR);
+});
+
 
 $app->get('/categories/all',  function (Silex\Application $app ) {
 

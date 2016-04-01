@@ -17,6 +17,7 @@ budgetApp.directive('budgetCategoriesDropdown', ['$rootScope', '$q', function($r
 
     },
     controller:function ($scope, $http) {
+      var defer = $q.defer();
       $http({
         url: $rootScope.endPoint + '/categories/all',
               method: "GET",

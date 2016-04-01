@@ -1,10 +1,10 @@
-budgetApp.service('spendService', function spendService($http, $q, $rootScope){
+budgetApp.service('spendService', ['$http', '$q', '$rootScope',  function spendService($http, $q, $rootScope){
 	var spendService 	    = this;
 	spendService.spendList  = {};
 
 	spendService.getAllSpends = function(){
 		var defer = $q.defer();
-		 
+
 		$http({
 			url: $rootScope.endPoint + '/spend/all',
             method: "GET"
@@ -39,4 +39,4 @@ budgetApp.service('spendService', function spendService($http, $q, $rootScope){
 		return defer.promise;
 	}
 
-});
+}]);

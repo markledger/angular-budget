@@ -36,12 +36,22 @@ $app->post('/spend/add', function (Silex\Application $app, Request $request) {
 
 // Declare our primary action
 $app->get('/spend/all',  function (Silex\Application $app ) {
-   
+
    $sql = "SELECT * FROM spends";
-   $stmt = $app['db']->prepare($sql); 
+   $stmt = $app['db']->prepare($sql);
    $stmt->execute();
    $result = $stmt->fetchAll();
-   
+
+   return $app->json($result);
+});
+
+$app->get('/categories/all',  function (Silex\Application $app ) {
+
+   $sql = "SELECT * FROM categories";
+   $stmt = $app['db']->prepare($sql);
+   $stmt->execute();
+   $result = $stmt->fetchAll();
+
    return $app->json($result);
 });
 

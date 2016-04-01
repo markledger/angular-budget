@@ -1,5 +1,5 @@
-budgetApp.controller('spendCtrl',   ['$scope', '$routeParams', 'spendService',  'modalService',
-	function($scope, $routeParams, spendService, modalService ){
+budgetApp.controller('spendCtrl',   ['$scope', '$routeParams', 'spendService',  'modalService', '$filter',
+	function($scope, $routeParams, spendService, modalService, $filter ){
  console.log(modalService);
 	$scope.master = {};
 	$scope.quantity = 10;
@@ -20,11 +20,12 @@ budgetApp.controller('spendCtrl',   ['$scope', '$routeParams', 'spendService',  
 	}
 
 	$scope.delete = function(id){
+    spend_for_deleting = $filter('getById')($scope.currentSpends, id);
 
     var modalOptions = {
         closeButtonText: 'Cancel',
         actionButtonText: 'Delete',
-        headerText: 'Delete ' + id + '?',
+        headerText: spend_for_deleting.name + ' (' + $filter('date')(spend_for_deleting.date)  + ')?',
         bodyText: 'Are you sure you want to delete this spend?'
     };
 
